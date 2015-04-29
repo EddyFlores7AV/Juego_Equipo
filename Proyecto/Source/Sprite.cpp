@@ -128,7 +128,9 @@ void Sprite::CreateTextures(char* name){
 		translate_x = x;
 		translate_y = y;
 		translate_z = z;
+
 	}
+
 
 	void Sprite::TranslateXY(GLfloat x, GLfloat y){
 		translate_x = x;

@@ -66,10 +66,14 @@ void Nave::Draw()
 		nave->Draw();
 		for (int i = 0; i < MAXIMO_DE_BALAS; i++)
 		{
+			
 			bala[i]->Draw();
 			switch (tipoNave)
 			{
+				
 			case NAVE_PROPIA:
+				//nave->ScalateXYZ(10.f, 10.f, 10.f);
+				nave->ScaleXYZ(30.f, 30.f, 30.f);
 				bala[i]->MoverArribaAbajo(-10);
 				break;
 

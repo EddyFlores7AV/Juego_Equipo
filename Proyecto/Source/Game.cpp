@@ -9,6 +9,17 @@ CGame::CGame(){
 	tiempoFrameInicial = CERO;
 	tick = CERO;
 	atexit(SDL_Quit);
+
+	///Animacion de nave que se sale (posicion original)
+		translate_nave_x = -800;
+		translate_nave_y = -450;
+		translate_nave_z = -5.f;
+		rotate_nave_x = -95.f;
+		rotate_nave_y = 0.f;
+		rotate_nave_z = 0.f;
+
+		//////
+	
 }
 
 void CGame::IniciandoVideo()
@@ -46,7 +57,7 @@ void CGame::IniciandoVideo()
 void CGame::CargandoObjetos()
 {
 	menuFondo = new Sprite(&openGlImplement, "Menu", 0, 0);
-	textoTitulo = new Sprite(&openGlImplement, "Texto_Titulo", 0, 0);
+//	textoTitulo = new Sprite(&openGlImplement, "Texto_Titulo", 0, 0);
 	textoNombre = new Sprite(&openGlImplement, "Texto_Nombre", 0, 0);
 	textoOpcion1 = new Sprite(&openGlImplement, "Texto_Opcion1", 0, 0);
 	textoOpcion2 = new Sprite(&openGlImplement, "Texto_Opcion2", 0, 0);
@@ -69,7 +80,7 @@ void CGame::CargandoObjetos()
 // Con esta función eliminaremos todos los elementos en pantalla
 void CGame::Finalize(){
 	delete menuFondo;
-	delete textoTitulo;
+//	delete textoTitulo;
 	delete textoNombre;
 	delete textoOpcion1;
 	delete textoOpcion2;
@@ -321,9 +332,30 @@ void CGame::MenuActualizar()
 void CGame::MenuPintar()
 {
 	menuFondo->Draw();
-	textoTitulo->TranslateXYDraw(WIDTH_SCREEN / 8, 0);
+	//textoTitulo->TranslateXYDraw(WIDTH_SCREEN / 8, 0);
+	///animacion
+	textoNombre->TranslateXYZ(translate_nave_x, translate_nave_y, translate_nave_z);//570
+	translate_nave_x += 8;
+	if(translate_nave_x >1200){
+	translate_nave_x = -800;
+	translate_nave_y = -450;
+	translate_nave_z = -5.f;
+	rotate_nave_x = -95.f;
+	rotate_nave_y = 0.f;
+	rotate_nave_z = 0.f;
 
-	textoNombre->TranslateXY( WIDTH_SCREEN / 3, 450);//570
+	}
+
+
+	if(translate_nave_x >450){
+	translate_nave_y++; 
+	translate_nave_z+=0.05f;	
+	rotate_nave_x += 1.f;
+	
+}
+
+	textoNombre->ScaleXYZ(60.f, 60.f, 60.f);
+    textoNombre->RotateXYZ(rotate_nave_x,rotate_nave_y,rotate_nave_z);
 	textoNombre->Draw();
 
 	textoOpcion1->TranslateXYDraw(320, 220);
